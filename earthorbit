@@ -1,10 +1,44 @@
-  % keplerslaws.m
-%Variable Guide
-%
-%Kepler's First Law: Orbital Motion: All planets move in elliptical orbits around the sun. The sun is at one focus, and the %other focus is empty
-%Kepler's Second Law: Law of Areas: The line joining a planet to the sun sweeps over equal areas in equal time intervals.
+%earth_orbit.m
+%Script for Apollo 11 trip when rocket rotating around earth
 
-% newtonslaws.m
-%Newton's First Law of Motion: A body in motion will keep moving in the same direction at the same speed unless acted upon
-%by an external force
-%Newton's Second Law of Motion: Force equals mass times acceleration
+%Variable dictionary
+
+%Input Orbit parameters
+r1 = 186 %initial orbital radius [km]
+r2 = 376285 %final orbital radius [km]
+%i %inclination [degrees]
+%c % [revolutions/day]
+
+%O %Right ascension of ascending node [degrees]
+%ec = %Eccentricity [-]
+%M0 = %Mean anomaly [degrees]
+%d = %[revolutions/day]
+w = %argument of perigee
+
+%Input Constants
+mu = 398600.4418 %geocentric gravitational constant [km^3*s^(-2)]
+Rz = 6378 %equatorial radius of Earth [km]
+
+%Convert input orbit parameters from degrees to radians
+
+O = O*pi/180; %[rad]
+i = i*pi/180; %[rad]
+M0 = M0*pi/180; %[rad]
+w = w*pi/180; %[rad]
+
+c2= c*2*pi/86164; %c to [rad/s]
+T = 2*pi/cs; %period [s]
+a=mu^(1/3)/c2^(2/3); %calculation for major semi-axis
+rp = a*(1-ec); %radius of perigee [km]
+vp = sqrt(mu*(2/rp-1/a)); %velocity at perigee [km/s]
+ra = a*(1+ec); %radius of apogee [km]
+va= sqrt(mu*(2/ra-1/a)); %velocity at apogee [km/s]
+hours = floor(T/3600);  %Calculating number of hours in period
+minutes = floor((T-hours*3600)/60); %Calculating number of minutes of period
+seconds = floor(T-hours*3600-minutes*60); %seconds
+
+deltaV1 = (sqrt(mu/r1))*(sqrt(2*r2/r1+r2)-1)
+
+deltaV2 = sqrt(mu/r1)*(1-sqrt(2*r1/(r1+r2)))
+
+totaldeltaV = deltaV1 + deltaV2
