@@ -1,3 +1,7 @@
+
+%deltaV calculations 
+%Based on https://space.stackexchange.com/questions/2103/how-to-calculate-delta-v-for-lunar-flyby
+
 % v = velocity at current postition
 % mu = is the GM of the central body
 % r = the distance from the central body
@@ -39,7 +43,7 @@ deltaVinject = vp - vleo
 vllo = sqrt(mum/rm);
 vm = sqrt(mue/am);
 va = sqrt((2.*re.*mue)/(am.*(am+re)));
-vl = sqrt(((vm-va).^2)+(2.*mum/rm));
+vl = sqrt(((vm-va).^2)+((2.*mum)/rm));
 
 deltaVsinsert = vl - vllo
 
