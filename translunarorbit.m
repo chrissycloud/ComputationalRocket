@@ -1,4 +1,5 @@
-%deltaV calculations using approximate patched conic technique
+
+%deltaV calculations 
 %Based on https://space.stackexchange.com/questions/2103/how-to-calculate-delta-v-for-lunar-flyby
 
 % v = velocity at current postition
@@ -30,9 +31,9 @@ clear all
 
 mue = 3.986*10^14;
 mum = 4.905*10^12;
-re = 200000;
-rm = 100000;
-am = 4600000;
+re = 200;
+rm = 100;
+am = 4600;
 
 vleo = sqrt(mue/re);
 vp = sqrt((2.*am.*mue/(re.*(re+am))));
