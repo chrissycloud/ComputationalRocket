@@ -3,7 +3,7 @@ clc
 clear all
 
 R1 = 6371000 + 200000;          % orbital radius in low earth orbit
-R2 = (384402000-100000-1737000);% orbital radius in low lunar orbit
+R2 = (384402000-144841-1737000);% orbital radius in low lunar orbit
 atransfer = (R1+R2)/2 ;         % semi major axis
 mue = 3.986*10^14;              % GM of the earth
 mum = 4.905*10^12;              % GM of the moon
@@ -22,6 +22,14 @@ Vapoapsis = (((2.*pi.*atransfer)./Ptransfer).*sqrt((2.*atransfer./R2) - 1));
 deltaV2 = V2 - Vapoapsis;
 
 deltaVtotal = deltaV1 + deltaV2;
+
+m = 123000;
+thrust = 1033100;
+
+Burntime1 = (deltaV1*m)/thrust
+
+Burntime2 = (deltaV2*m)/thrust
+
 
 %Period of the orbit
 
@@ -43,7 +51,7 @@ V3 = (2*pi*R3)/P3
 Ptransferreturn = sqrt(((atransferreturn.^3).*4.*(pi.^2))/(mum));
 Vperigee = (((2.*pi.*atransferreturn)./Ptransferreturn).*sqrt((2.*atransferreturn./R3) - 1));
 
-deltaV3 = Vperigee
+deltaV3 = Vperigee - V3;
 
 %Vapogee = (((2.*pi.*atransfer)./Ptransferreturn).*sqrt((2.*atransfer./R3) - 1));
 
@@ -58,8 +66,8 @@ deltaVallowance = 8796.2 - totaljourneydeltaV;
 
 %deltav allowance in mass
 massratio = exp(deltaVallowance/(421*9.81))
-leftovermass = 120800/massratio
+leftovermass = 123000/massratio
 %mass of fuel left over
-massoffuel = leftovermass-10000
+leftovermassoffuel = leftovermass-10000
 
 
